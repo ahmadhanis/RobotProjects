@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'mainscreen.dart';
@@ -14,17 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Kame Controller',
+      title: 'Mini Kame',
       theme: ThemeData(
-        primarySwatch: Colors.red,
-        brightness: Brightness.light,
-        textTheme: GoogleFonts.latoTextTheme(
-          Theme.of(context)
-              .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
-        ),
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Mini Kame'),
+      home: const MyHomePage(title: 'Wifi Car'),
     );
   }
 }
@@ -42,7 +35,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   @override
   Widget build(BuildContext context) {
-    return const MySplashScreen(title: 'Kame Controller');
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'WiFi Car Controller',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        brightness: Brightness.light,
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context)
+              .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
+        ),
+      ),
+      home: const MySplashScreen(title: 'WiFi Car Controller'),
+    );
   }
 }
 
@@ -73,17 +78,14 @@ class _MySplashScreenState extends State<MySplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text("Mini EspKame Controller",
+              const Text("WiFi Car Controller",
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                   )),
               Padding(
                 padding: const EdgeInsets.all(64.0),
-                child: Image.asset(
-                  'assets/espkame.png',
-                  scale: 2.5,
-                ),
+                child: Image.asset('assets/wificar.png',scale: 1.5,),
               ),
               const CircularProgressIndicator(),
               Text(status,

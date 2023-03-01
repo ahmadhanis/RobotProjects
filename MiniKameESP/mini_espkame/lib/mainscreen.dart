@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:open_settings/open_settings.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -22,6 +24,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   var status;
   String os = "";
   bool remember = false;
+  final SpeechToText _speechToText = SpeechToText();
+  bool _speechEnabled = false;
+  String _lastWords = '';
 
   @override
   void initState() {
@@ -29,7 +34,37 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     getPermission();
     _getWifissid();
     WidgetsBinding.instance.addObserver(this);
+    _initSpeech();
     //loadPref();
+  }
+
+  void _initSpeech() async {
+    _speechEnabled = await _speechToText.initialize();
+    setState(() {});
+    // if (_speechToText.isAvailable) {
+    //   print("YES AVAILABLE");
+    // } else {
+    //   print("SORRY NOT AVAILABLE");
+    // }
+  }
+
+  void _startListening() async {
+    await _speechToText.listen(onResult: _onSpeechResult);
+    setState(() {});
+  }
+
+  void _stopListening() async {
+    await _speechToText.stop();
+    setState(() {});
+  }
+
+  void _onSpeechResult(SpeechRecognitionResult result) {
+    setState(() {
+      _lastWords = result.recognizedWords;
+      if (result.finalResult) {
+        voiceKame(_lastWords);
+      }
+    });
   }
 
   @override
@@ -63,9 +98,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           actions: [
             IconButton(
                 onPressed: () {
-                  changeSSIDDialog();
+                  aboutApp();
                 },
-                icon: const Icon(Icons.settings))
+                icon: const Icon(Icons.info))
           ],
         ),
         body: SingleChildScrollView(
@@ -73,6 +108,50 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
             child: Column(
               children: [
                 const SizedBox(height: 20),
+                Text(
+                  "Please connect to the quad access point.\nCurrently connected to $ssid",
+                  style: const TextStyle(fontSize: 16.0),
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      child: const Text("CHECK"),
+                      onPressed: () {
+                        getPermission();
+                        _getWifissid();
+                      },
+                    ),
+                    const SizedBox(width: 10),
+                    ElevatedButton(
+                      child: const Text("WIFI"),
+                      onPressed: () {
+                        OpenSettings.openWIFISetting();
+                      },
+                    ),
+                    const SizedBox(width: 10),
+                    ElevatedButton(
+                      child: const Text("RESET"),
+                      onPressed: () {
+                        resetDialog();
+                      },
+                    ),
+                    const SizedBox(width: 10),
+                    ElevatedButton(
+                      child: const Text("CHANGE"),
+                      onPressed: () {
+                        changeSSIDDialog();
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const Divider(
+                  height: 1,
+                  color: Colors.black,
+                ),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -88,7 +167,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     )
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -127,7 +206,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         ))
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -152,11 +231,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         ))
                   ],
                 ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black,
-                ),
+                const SizedBox(height: 5),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -256,51 +331,44 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         )),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 const Divider(
                   height: 1,
                   color: Colors.black,
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  "Please connect to the quad access point.\nCurrently connected to $ssid",
-                  style: const TextStyle(fontSize: 16.0),
+                const SizedBox(height: 5),
+                const Text("VOICE COMMAND",
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    _speechToText.isListening
+                        ? _lastWords
+                        : _speechEnabled
+                            ? 'Tap the microphone to start listening...'
+                            : 'Speech not available',
+                  ),
                 ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      child: const Text("CHECK"),
-                      onPressed: () {
-                        getPermission();
-                        _getWifissid();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("WIFI"),
-                      onPressed: () {
-                        OpenSettings.openWIFISetting();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("RESET"),
-                      onPressed: () {
-                        resetDialog();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("CHANGE"),
-                      onPressed: () {
-                        changeSSIDDialog();
-                      },
-                    ),
-                  ],
+                const SizedBox(width: 10),
+                IconButton(
+                  onPressed: () {
+                    _startListening();
+
+                    // _speechToText.isNotListening
+                    //     ? _stopListening
+                    //     : _startListening;
+                  },
+                  icon: Icon(
+                      _speechToText.isNotListening ? Icons.mic_off : Icons.mic),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(width: 5),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Text("Command: $_lastWords",
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold)),
+                ),
               ],
             ),
           ),
@@ -322,35 +390,72 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     });
   }
 
-  void commandKame(String s) {
-    // if (ssid != '"kame"') {
-    //   print(ssid);
-    //   Fluttertoast.showToast(
-    //       msg: "Please connect to KAME access point",
-    //       toastLength: Toast.LENGTH_SHORT,
-    //       gravity: ToastGravity.BOTTOM,
-    //       timeInSecForIosWeb: 1,
-    //       fontSize: 16.0);
+  void voiceKame(String command) {
+    switch (command.toLowerCase()) {
+      case "0":
+        commandKame("0");
+        break;
+      case "forward":
+        commandKame("1");
+        break;
+      case "down":
+        commandKame("2");
+        break;
+      case "left":
+        commandKame("3");
+        break;
+      case "right":
+        commandKame("4");
+        break;
+      case "home":
+        commandKame("5");
+        break;
+      case "push-up":
+        commandKame("6");
+        break;
+      case "up down":
+        commandKame("7");
+        break;
+      case "jump":
+        commandKame("8");
+        break;
+      case "hello":
+        commandKame("9");
+        break;
+      case "punch":
+        commandKame("10");
+        break;
+      case "dance":
+        commandKame("11");
+        break;
+      case "moonwalk":
+        commandKame("12");
+        break;
+      case "run":
+        commandKame("13");
+        break;
+      case "omni":
+        commandKame("14");
+        break;
+      case "initialise":
+        commandKame("15");
+        break;
+      default:
+        Fluttertoast.showToast(
+            msg: "Command not available",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
+        break;
+    }
+  }
 
-    //   Timer(const Duration(seconds: 1), () => OpenSettings.openWIFISetting());
-    //   return;
-    // }
+  void commandKame(String s) {
     http
         .get(
       Uri.parse("http://192.168.4.1/$s"),
     )
-        //   .timeout(
-        // const Duration(seconds: 5),
-        // onTimeout: () {
-        //   Fluttertoast.showToast(
-        //       msg: "Timeout",
-        //       toastLength: Toast.LENGTH_SHORT,
-        //       gravity: ToastGravity.BOTTOM,
-        //       timeInSecForIosWeb: 1,
-        //       fontSize: 16.0);
-        //   return http.Response(
-        //       'Error', 508); // Request Timeout response status code
-        // },)
         .then((response) {
       Fluttertoast.showToast(
           msg: response.body,
@@ -416,6 +521,47 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   //     });
   //   }
   // }
+  void aboutApp() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+          title: const Text(
+            "About APP",
+            style: TextStyle(),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/hanis2.jpg',
+                scale: 4,
+              ),
+              const Text(
+                "This application was developed by Ahmad Hanis from the School of Computing UUM. He can be contacted via email at ahmadhanis@uum.edu.my.",
+                textAlign: TextAlign.justify,
+                textDirection: TextDirection.rtl,
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                "Close",
+                style: TextStyle(),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   void changeSSIDDialog() {
     TextEditingController ssidctrl = TextEditingController();
@@ -436,9 +582,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         // return object of type Dialog
         return AlertDialog(
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              borderRadius: BorderRadius.all(Radius.circular(5.0))),
           title: const Text(
-            "Change robot SSID?",
+            "Change KAME SSID?",
             style: TextStyle(),
           ),
           content: Column(
@@ -525,28 +671,4 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
       },
     );
   }
-
-  // void _saveRemovePref(bool value, ssid, pass) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   if (value) {
-  //     await prefs.setString('ssid', ssid);
-  //     await prefs.setString('pass', pass);
-  //     Fluttertoast.showToast(
-  //         msg: "Preference Stored",
-  //         toastLength: Toast.LENGTH_SHORT,
-  //         gravity: ToastGravity.BOTTOM,
-  //         timeInSecForIosWeb: 1,
-  //         fontSize: 14.0);
-  //   } else {
-  //     await prefs.setString('ssid', '');
-  //     await prefs.setString('pass', '');
-
-  //     Fluttertoast.showToast(
-  //         msg: "Preference Removed",
-  //         toastLength: Toast.LENGTH_SHORT,
-  //         gravity: ToastGravity.BOTTOM,
-  //         timeInSecForIosWeb: 1,
-  //         fontSize: 14.0);
-  //   }
-  // }
 }
