@@ -480,7 +480,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     //wifiName = _networkInfo.getWifiName();
     setState(() {
       if (wifiName == null) {
-        ssid = "No SSID";
+        ssid = "not available";
       } else {
         ssid = wifiName.toString().replaceAll('"', '');
       }
