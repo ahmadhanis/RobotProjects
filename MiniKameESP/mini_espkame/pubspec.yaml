@@ -31,8 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   fluttertoast: ^8.0.9
-  google_fonts: ^3.0.1
-  http: ^0.13.5
+  google_fonts: ^6.1.0
+  http: ^1.0.0
   network_info_plus: ^2.1.4+1
   open_settings: ^2.0.2
   permission_handler: ^10.0.0

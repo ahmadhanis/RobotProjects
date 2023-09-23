@@ -26,6 +26,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   String statusauto = "off";
   String statussumo = "off";
   late double screenHeight, screenWidth;
+  double speed = 255.0;
 
   @override
   void initState() {
@@ -111,109 +112,166 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                      iconSize: 48,
-                      onPressed: () {
-                        commandCar("backwardleft");
-                        setState(() {
-                          status = "Forward Left";
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_left)),
-                  IconButton(
-                      iconSize: 48,
-                      onPressed: () {
-                        commandCar("forward");
-                        setState(() {
-                          status = "Forward";
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_upward)),
-                  IconButton(
-                      iconSize: 48,
-                      onPressed: () {
-                        commandCar("backwardright");
-                        setState(() {
-                          status = "Forward Right";
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_right)),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      iconSize: 48,
-                      onPressed: () {
-                        commandCar("right");
-                        setState(() {
-                          status = "Right";
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_back)),
-                  const SizedBox(
-                    width: 24,
+                  Flexible(
+                      flex: 2,
+                      child: SizedBox(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const Text("Speed"),
+                            RotatedBox(
+                              quarterTurns: 3,
+                              child: Slider(
+                                min: 100,
+                                max: 255.0,
+                                value: speed,
+                                label: speed.toString(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    speed = value.ceilToDouble();
+                                  });
+                                },
+                              ),
+                            ),
+                            Text(speed.toStringAsFixed(1)),
+                          ],
+                        ),
+                      )),
+                  Flexible(
+                    flex: 8,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                                iconSize: 48,
+                                onPressed: () {
+                                  commandCar("backwardleft");
+                                  setState(() {
+                                    status = "Backward Left";
+                                  });
+                                },
+                                icon: const Icon(Icons.arrow_left)),
+                            IconButton(
+                                iconSize: 48,
+                                onPressed: () {
+                                  commandCar("forward");
+                                  setState(() {
+                                    status = "Forward";
+                                  });
+                                },
+                                icon: const Icon(Icons.arrow_upward)),
+                            IconButton(
+                                iconSize: 48,
+                                onPressed: () {
+                                  commandCar("backwardright");
+                                  setState(() {
+                                    status = "Forward Right";
+                                  });
+                                },
+                                icon: const Icon(Icons.arrow_right)),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                                iconSize: 48,
+                                onPressed: () {
+                                  commandCar("right");
+                                  setState(() {
+                                    status = "Right";
+                                  });
+                                },
+                                icon: const Icon(Icons.arrow_back)),
+                            const SizedBox(
+                              width: 24,
+                            ),
+                            IconButton(
+                                iconSize: 48,
+                                onPressed: () {
+                                  commandCar("stop");
+                                  setState(() {
+                                    status = "Stop";
+                                  });
+                                },
+                                icon: const Icon(Icons.stop)),
+                            const SizedBox(width: 22),
+                            IconButton(
+                                iconSize: 48,
+                                onPressed: () {
+                                  commandCar("left");
+                                  setState(() {
+                                    status = "Left";
+                                  });
+                                },
+                                icon: const Icon(Icons.arrow_forward))
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 22,
+                            ),
+                            IconButton(
+                                iconSize: 48,
+                                onPressed: () {
+                                  commandCar("backwardright");
+                                  setState(() {
+                                    status = "Backward Right";
+                                  });
+                                },
+                                icon: const Icon(Icons.arrow_left)),
+                            IconButton(
+                                iconSize: 48,
+                                onPressed: () {
+                                  commandCar("reverse");
+                                  setState(() {
+                                    status = "Reverse";
+                                  });
+                                },
+                                icon: const Icon(Icons.arrow_downward)),
+                            IconButton(
+                                iconSize: 48,
+                                onPressed: () {
+                                  commandCar("backwardleft");
+                                  setState(() {
+                                    status = "Backward Left";
+                                  });
+                                },
+                                icon: const Icon(Icons.arrow_right)),
+                            const SizedBox(width: 20),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  IconButton(
-                      iconSize: 48,
-                      onPressed: () {
-                        commandCar("stop");
-                        setState(() {
-                          status = "Stop";
-                        });
-                      },
-                      icon: const Icon(Icons.stop)),
-                  const SizedBox(width: 22),
-                  IconButton(
-                      iconSize: 48,
-                      onPressed: () {
-                        commandCar("left");
-                        setState(() {
-                          status = "Left";
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_forward))
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    width: 22,
-                  ),
-                  IconButton(
-                      iconSize: 48,
-                      onPressed: () {
-                        commandCar("backwardright");
-                        setState(() {
-                          status = "Backward Right";
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_left)),
-                  IconButton(
-                      iconSize: 48,
-                      onPressed: () {
-                        commandCar("backward");
-                        setState(() {
-                          status = "Backward";
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_downward)),
-                  IconButton(
-                      iconSize: 48,
-                      onPressed: () {
-                        commandCar("backwardleft");
-                        setState(() {
-                          status = "Backward Left";
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_right)),
-                  const SizedBox(width: 20),
-                ],
-              ),
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: [
+              //     const Text("Speed"),
+              //     RotatedBox(
+              //       quarterTurns: 1,
+              //       child: Slider(
+              //         min: 0.0,
+              //         max: 255.0,
+              //         value: speed,
+              //         label: speed.toString(),
+              //         onChanged: (value) {
+              //           setState(() {
+              //             speed = value;
+              //           });
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
               const SizedBox(height: 20),
               const Divider(
                 height: 5,
@@ -231,7 +289,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   IconButton(
                       iconSize: 48,
                       onPressed: () {
-                          if (statussumo == "on") {
+                        if (statussumo == "on") {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text("One mode at a time")));
@@ -320,7 +378,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   void commandCar(String s) {
     http
         .get(
-          Uri.parse("http://192.168.4.1/$s"),
+          Uri.parse("http://192.168.4.1/$s?speed=$speed"),
         )
         .then((response) {});
   }
