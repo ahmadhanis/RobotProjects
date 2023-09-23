@@ -42,11 +42,11 @@ class _TrimScreenState extends State<TrimScreen> {
                       onChanged: (value) {
                         int val = int.parse(value);
                         if ((val < -9) || (val > 9)) {
-                          tctrl3.text = "0".toString();
+                          tctrl8.text = "0".toString();
                           setState(() {});
                         }
                       },
-                      controller: tctrl3,
+                      controller: tctrl8,
                       decoration: const InputDecoration(
                           labelText: 'T3', hintText: 'T3'),
                       keyboardType: TextInputType.number),
@@ -76,11 +76,11 @@ class _TrimScreenState extends State<TrimScreen> {
                 Flexible(
                   flex: 1,
                   child: TextField(
-                      controller: tctrl2,
+                      controller: tctrl4,
                       onChanged: (value) {
                         int val = int.parse(value);
                         if ((val < -9) || (val > 9)) {
-                          tctrl2.text = "0".toString();
+                          tctrl4.text = "0".toString();
                           setState(() {});
                         }
                       },
@@ -94,11 +94,11 @@ class _TrimScreenState extends State<TrimScreen> {
                 Flexible(
                   flex: 1,
                   child: TextField(
-                      controller: tctrl4,
+                      controller: tctrl6,
                       onChanged: (value) {
                         int val = int.parse(value);
                         if ((val < -9) || (val > 9)) {
-                          tctrl4.text = "0".toString();
+                          tctrl6.text = "0".toString();
                           setState(() {});
                         }
                       },
@@ -124,6 +124,26 @@ class _TrimScreenState extends State<TrimScreen> {
                 Flexible(
                   flex: 1,
                   child: TextField(
+                      controller: tctrl2,
+                      onChanged: (value) {
+                        int val = int.parse(value);
+                        if ((val < -9) || (val > 9)) {
+                          tctrl2.text = "0".toString();
+                          setState(() {});
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        labelText: 'T7',
+                        hintText: 'T7',
+                      ),
+                      keyboardType: TextInputType.number),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Flexible(
+                  flex: 1,
+                  child: TextField(
                       controller: tctrl7,
                       onChanged: (value) {
                         int val = int.parse(value);
@@ -133,9 +153,8 @@ class _TrimScreenState extends State<TrimScreen> {
                         }
                       },
                       decoration: const InputDecoration(
-                        labelText: 'T7',
-                        hintText: 'T7',
-                      ),
+                          labelText: 'T5', hintText: 'T5'),
+                      style: const TextStyle(),
                       keyboardType: TextInputType.number),
                 ),
                 const SizedBox(
@@ -153,25 +172,6 @@ class _TrimScreenState extends State<TrimScreen> {
                         }
                       },
                       decoration: const InputDecoration(
-                          labelText: 'T5', hintText: 'T5'),
-                      style: const TextStyle(),
-                      keyboardType: TextInputType.number),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: TextField(
-                      controller: tctrl6,
-                      onChanged: (value) {
-                        int val = int.parse(value);
-                        if ((val < -9) || (val > 9)) {
-                          tctrl6.text = "0".toString();
-                          setState(() {});
-                        }
-                      },
-                      decoration: const InputDecoration(
                           labelText: 'T6', hintText: 'T6'),
                       keyboardType: TextInputType.number),
                 ),
@@ -181,11 +181,11 @@ class _TrimScreenState extends State<TrimScreen> {
                 Flexible(
                   flex: 1,
                   child: TextField(
-                      controller: tctrl8,
+                      controller: tctrl3,
                       onChanged: (value) {
                         int val = int.parse(value);
                         if ((val < -9) || (val > 9)) {
-                          tctrl8.text = "0".toString();
+                          tctrl3.text = "0".toString();
                           setState(() {});
                         }
                       },

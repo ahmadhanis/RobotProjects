@@ -16,7 +16,7 @@
    <application
         android:label="ESP KAME"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/kameicon"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"

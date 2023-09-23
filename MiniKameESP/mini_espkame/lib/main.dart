@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Kame Controller',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.cyan,
         brightness: Brightness.light,
         textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context)

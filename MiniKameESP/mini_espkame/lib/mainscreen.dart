@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
-
+  final NetworkInfo _networkInfo = NetworkInfo();
   @override
   void initState() {
     super.initState();
@@ -164,80 +164,141 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: 110,
-                      height: 50,
-                      child: ElevatedButton(
-                        child: const Text("FORWARD"),
-                        onPressed: () {
-                          commandKame("1");
-                        },
-                      ),
-                    )
+                    RawMaterialButton(
+                      onPressed: () {
+                        commandKame("1");
+                      },
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(15.0),
+                      fillColor: Colors.white,
+                      elevation: 2.0,
+                      child: const Icon(Icons.arrow_upward, size: 35),
+                    ),
+                    // SizedBox(
+                    //   width: 150,
+                    //   height: 50,
+                    //   child: ElevatedButton.icon(
+                    //     icon: const Icon(Icons.arrow_upward),
+                    //     label: const Text("FORWARD"),
+                    //     onPressed: () {
+                    //       commandKame("1");
+                    //     },
+                    //   ),
+                    // )
                   ],
                 ),
                 const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text("LEFT"),
-                          onPressed: () {
-                            commandKame("3");
-                          },
-                        )),
+                    RawMaterialButton(
+                      onPressed: () {
+                        commandKame("3");
+                      },
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(15.0),
+                      fillColor: Colors.white,
+                      elevation: 2.0,
+                      child: const Icon(Icons.arrow_back, size: 35),
+                    ),
+                    // SizedBox(
+                    //     width: 100,
+                    //     height: 50,
+                    //     child: ElevatedButton(
+                    //       child: const Text("LEFT"),
+                    //       onPressed: () {
+                    //         commandKame("3");
+                    //       },
+                    //     )),
                     const SizedBox(
                       width: 20,
                     ),
-                    SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text("HOME"),
-                          onPressed: () {
-                            commandKame("5");
-                          },
-                        )),
+                    RawMaterialButton(
+                      onPressed: () {
+                        commandKame("5");
+                      },
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(15.0),
+                      fillColor: Colors.white,
+                      elevation: 2.0,
+                      child: const Icon(Icons.home, size: 35),
+                    ),
+                    // SizedBox(
+                    //     width: 100,
+                    //     height: 50,
+                    //     child: ElevatedButton(
+                    //       child: const Text("HOME"),
+                    //       onPressed: () {
+                    //         commandKame("5");
+                    //       },
+                    //     )),
                     const SizedBox(
                       width: 20,
                     ),
-                    SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text("RIGHT"),
-                          onPressed: () {
-                            commandKame("4");
-                          },
-                        ))
+                    RawMaterialButton(
+                      onPressed: () {
+                        commandKame("4");
+                      },
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(15.0),
+                      fillColor: Colors.white,
+                      elevation: 2.0,
+                      child: const Icon(Icons.arrow_forward, size: 35),
+                    ),
+                    // SizedBox(
+                    //     width: 100,
+                    //     height: 50,
+                    //     child: ElevatedButton(
+                    //       child: const Text("RIGHT"),
+                    //       onPressed: () {
+                    //         commandKame("4");
+                    //       },
+                    //     ))
                   ],
                 ),
                 const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                        width: 110,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text("ZERO"),
-                          onPressed: () {
-                            commandKame("0");
-                          },
-                        )),
+                    RawMaterialButton(
+                      onPressed: () {
+                        commandKame("0");
+                      },
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(15.0),
+                      fillColor: Colors.white,
+                      elevation: 2.0,
+                      child: const Icon(Icons.exposure_zero, size: 35),
+                    ),
+                    // SizedBox(
+                    //     width: 110,
+                    //     height: 50,
+                    //     child: ElevatedButton(
+                    //       child: const Text("ZERO"),
+                    //       onPressed: () {
+                    //         commandKame("0");
+                    //       },
+                    //     )),
                     const SizedBox(width: 20),
-                    SizedBox(
-                        width: 110,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text("INIT"),
-                          onPressed: () {
-                            commandKame("15");
-                          },
-                        ))
+                    RawMaterialButton(
+                      onPressed: () {
+                        commandKame("15");
+                      },
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(15.0),
+                      fillColor: Colors.white,
+                      elevation: 2.0,
+                      child: const Icon(Icons.start, size: 35),
+                    ),
+                    // SizedBox(
+                    //     width: 110,
+                    //     height: 50,
+                    //     child: ElevatedButton(
+                    //       child: const Text("INIT"),
+                    //       onPressed: () {
+                    //         commandKame("15");
+                    //       },
+                    //     ))
                   ],
                 ),
                 const SizedBox(height: 5),
@@ -476,14 +537,29 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   }
 
   Future<void> _getWifissid() async {
-    wifiName = await info.getWifiName();
-    //wifiName = _networkInfo.getWifiName();
+    // wifiName = await info.getWifiName();
+    // //wifiName = _networkInfo.getWifiName();
+    // setState(() {
+    //   if (wifiName == null) {
+    //     ssid = "not available";
+    //   } else {
+    //     ssid = wifiName.toString().replaceAll('"', '');
+    //   }
+    // });
+    // ignore: deprecated_member_use
+    var status = await _networkInfo.getLocationServiceAuthorization();
+    if (status == LocationAuthorizationStatus.notDetermined) {
+      // ignore: deprecated_member_use
+      status = await _networkInfo.requestLocationServiceAuthorization();
+    }
+    if (status == LocationAuthorizationStatus.authorizedAlways ||
+        status == LocationAuthorizationStatus.authorizedWhenInUse) {
+      wifiName = await _networkInfo.getWifiName();
+    } else {
+      wifiName = await _networkInfo.getWifiName();
+    }
     setState(() {
-      if (wifiName == null) {
-        ssid = "not available";
-      } else {
-        ssid = wifiName.toString().replaceAll('"', '');
-      }
+      wifiName = wifiName;
     });
   }
 
