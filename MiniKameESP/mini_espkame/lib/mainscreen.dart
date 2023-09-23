@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:mini_espkame/trimscreen.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:open_settings/open_settings.dart';
@@ -98,9 +99,17 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           actions: [
             IconButton(
                 onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (content) => const TrimScreen()));
+                },
+                icon: const Icon(Icons.settings)),
+            IconButton(
+                onPressed: () {
                   aboutApp();
                 },
-                icon: const Icon(Icons.info))
+                icon: const Icon(Icons.info)),
           ],
         ),
         body: SingleChildScrollView(

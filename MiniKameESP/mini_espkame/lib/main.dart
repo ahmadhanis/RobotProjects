@@ -73,16 +73,16 @@ class _MySplashScreenState extends State<MySplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text("Mini EspKame Controller",
+              const Text("ESP-KAME Controller",
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                   )),
               Padding(
-                padding: const EdgeInsets.all(64.0),
+                padding: const EdgeInsets.all(18.0),
                 child: Image.asset(
-                  'assets/espkame.png',
-                  scale: 2.5,
+                  'assets/kameside.png',
+                  //scale: 0.5,
                 ),
               ),
               const CircularProgressIndicator(),
@@ -91,7 +91,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   )),
-              const Text("Version 0.1",
+              const Text("Version 0.2",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
