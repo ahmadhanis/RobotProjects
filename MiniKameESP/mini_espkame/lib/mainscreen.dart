@@ -99,10 +99,38 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (content) => const TrimScreen()));
+                   Fluttertoast.showToast(
+                          msg: 'Connecting...',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          fontSize: 16.0);
+                  http
+                      .get(
+                    Uri.parse("http://192.168.4.1/15"),
+                  )
+                      .then((response) {
+                    if (response.statusCode == 200) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (content) => const TrimScreen()));
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: 'Failed. Please connect to your Kame first',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          fontSize: 16.0);
+                    }
+                  }).timeout(Duration(seconds: 5),onTimeout: (){
+                    Fluttertoast.showToast(
+                          msg: 'Timeout. Please connect to your Kame first',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          fontSize: 16.0);
+                  });
                 },
                 icon: const Icon(Icons.settings)),
             IconButton(
@@ -537,30 +565,30 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   }
 
   Future<void> _getWifissid() async {
-    // wifiName = await info.getWifiName();
-    // //wifiName = _networkInfo.getWifiName();
-    // setState(() {
-    //   if (wifiName == null) {
-    //     ssid = "not available";
-    //   } else {
-    //     ssid = wifiName.toString().replaceAll('"', '');
-    //   }
-    // });
-    // ignore: deprecated_member_use
-    var status = await _networkInfo.getLocationServiceAuthorization();
-    if (status == LocationAuthorizationStatus.notDetermined) {
-      // ignore: deprecated_member_use
-      status = await _networkInfo.requestLocationServiceAuthorization();
-    }
-    if (status == LocationAuthorizationStatus.authorizedAlways ||
-        status == LocationAuthorizationStatus.authorizedWhenInUse) {
-      wifiName = await _networkInfo.getWifiName();
-    } else {
-      wifiName = await _networkInfo.getWifiName();
-    }
+    wifiName = await info.getWifiName();
+    //wifiName = _networkInfo.getWifiName();
     setState(() {
-      wifiName = wifiName;
+      if (wifiName == null) {
+        ssid = "not available";
+      } else {
+        ssid = wifiName.toString().replaceAll('"', '');
+      }
     });
+    // ignore: deprecated_member_use
+    //var status = await _networkInfo.getLocationServiceAuthorization();
+    // if (status == LocationAuthorizationStatus.notDetermined) {
+    //   // ignore: deprecated_member_use
+    //   status = await _networkInfo.requestLocationServiceAuthorization();
+    // }
+    // if (status == LocationAuthorizationStatus.authorizedAlways ||
+    //     status == LocationAuthorizationStatus.authorizedWhenInUse) {
+    //   wifiName = await _networkInfo.getWifiName();
+    // } else {
+    //   wifiName = await _networkInfo.getWifiName();
+    // }
+    // setState(() {
+    //   wifiName = wifiName;
+    // });
   }
 
   Future<void> getPermission() async {

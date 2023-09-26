@@ -10,6 +10,12 @@ class TrimScreen extends StatefulWidget {
 }
 
 class _TrimScreenState extends State<TrimScreen> {
+  @override
+  void initState() {
+    super.initState();
+    loadTrim();
+  }
+
   TextEditingController tctrl1 = TextEditingController();
   TextEditingController tctrl2 = TextEditingController();
   TextEditingController tctrl3 = TextEditingController();
