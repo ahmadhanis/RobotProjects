@@ -255,7 +255,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     ),
                     RawMaterialButton(
                       onPressed: () {
-                        commandOtto("5");
+                        commandOtto("24");
                       },
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -595,7 +595,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   void changeSSID(newssid, newpass) {
     http
         .get(
-      Uri.parse("http://192.168.4.1/16?ssid=$newssid&password=$newpass"),
+      Uri.parse("http://192.168.4.1/changename?ssid=$newssid&password=$newpass"),
     )
         .then((response) {
       Fluttertoast.showToast(
@@ -916,7 +916,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
               ),
               onPressed: () {
                 Navigator.of(context).pop();
-                commandOtto("17");
+                commandOtto("reset");
               },
             ),
             TextButton(

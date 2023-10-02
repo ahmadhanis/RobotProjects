@@ -16,14 +16,12 @@ class _TrimScreenState extends State<TrimScreen> {
     loadTrim();
   }
 
-  TextEditingController tctrl1 = TextEditingController();
-  TextEditingController tctrl2 = TextEditingController();
-  TextEditingController tctrl3 = TextEditingController();
-  TextEditingController tctrl4 = TextEditingController();
-  TextEditingController tctrl5 = TextEditingController();
-  TextEditingController tctrl6 = TextEditingController();
-  TextEditingController tctrl7 = TextEditingController();
-  TextEditingController tctrl8 = TextEditingController();
+  TextEditingController tctrl1 = TextEditingController();//body left
+  TextEditingController tctrl2 = TextEditingController(); //body right
+  TextEditingController tctrl3 = TextEditingController(); //Left Leg
+  TextEditingController tctrl4 = TextEditingController(); //Rigth Leg
+  TextEditingController tctrl5 = TextEditingController(); //Left Arm
+  TextEditingController tctrl6 = TextEditingController(); // Right Arm
 
   @override
   Widget build(BuildContext context) {
@@ -42,24 +40,6 @@ class _TrimScreenState extends State<TrimScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                Flexible(
-                  flex: 1,
-                  child: TextField(
-                      onChanged: (value) {
-                        int val = int.parse(value);
-                        if ((val < -9) || (val > 9)) {
-                          tctrl8.text = "0".toString();
-                          setState(() {});
-                        }
-                      },
-                      controller: tctrl8,
-                      decoration: const InputDecoration(
-                          labelText: 'T3', hintText: 'T3'),
-                      keyboardType: TextInputType.number),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
                 Flexible(
                   flex: 1,
                   child: TextField(
@@ -82,7 +62,7 @@ class _TrimScreenState extends State<TrimScreen> {
                 Flexible(
                   flex: 1,
                   child: TextField(
-                      controller: tctrl4,
+                      controller: tctrl2,
                       onChanged: (value) {
                         int val = int.parse(value);
                         if ((val < -9) || (val > 9)) {
@@ -100,7 +80,7 @@ class _TrimScreenState extends State<TrimScreen> {
                 Flexible(
                   flex: 1,
                   child: TextField(
-                      controller: tctrl6,
+                      controller: tctrl3,
                       onChanged: (value) {
                         int val = int.parse(value);
                         if ((val < -9) || (val > 9)) {
@@ -109,7 +89,7 @@ class _TrimScreenState extends State<TrimScreen> {
                         }
                       },
                       decoration: const InputDecoration(
-                          labelText: 'T4', hintText: 'T4'),
+                          labelText: 'T3', hintText: 'T3'),
                       style: const TextStyle(),
                       keyboardType: TextInputType.number),
                 )
@@ -130,7 +110,7 @@ class _TrimScreenState extends State<TrimScreen> {
                 Flexible(
                   flex: 1,
                   child: TextField(
-                      controller: tctrl2,
+                      controller: tctrl4,
                       onChanged: (value) {
                         int val = int.parse(value);
                         if ((val < -9) || (val > 9)) {
@@ -139,28 +119,9 @@ class _TrimScreenState extends State<TrimScreen> {
                         }
                       },
                       decoration: const InputDecoration(
-                        labelText: 'T7',
-                        hintText: 'T7',
+                        labelText: 'T4',
+                        hintText: 'T4',
                       ),
-                      keyboardType: TextInputType.number),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: TextField(
-                      controller: tctrl7,
-                      onChanged: (value) {
-                        int val = int.parse(value);
-                        if ((val < -9) || (val > 9)) {
-                          tctrl7.text = "0".toString();
-                          setState(() {});
-                        }
-                      },
-                      decoration: const InputDecoration(
-                          labelText: 'T5', hintText: 'T5'),
-                      style: const TextStyle(),
                       keyboardType: TextInputType.number),
                 ),
                 const SizedBox(
@@ -178,7 +139,7 @@ class _TrimScreenState extends State<TrimScreen> {
                         }
                       },
                       decoration: const InputDecoration(
-                          labelText: 'T6', hintText: 'T6'),
+                          labelText: 'T5', hintText: 'T5'),
                       keyboardType: TextInputType.number),
                 ),
                 const SizedBox(
@@ -187,7 +148,7 @@ class _TrimScreenState extends State<TrimScreen> {
                 Flexible(
                   flex: 1,
                   child: TextField(
-                      controller: tctrl3,
+                      controller: tctrl6,
                       onChanged: (value) {
                         int val = int.parse(value);
                         if ((val < -9) || (val > 9)) {
@@ -196,7 +157,7 @@ class _TrimScreenState extends State<TrimScreen> {
                         }
                       },
                       decoration: const InputDecoration(
-                          labelText: 'T8', hintText: 'T8'),
+                          labelText: 'T6', hintText: 'T6'),
                       style: const TextStyle(),
                       keyboardType: TextInputType.number),
                 )
@@ -295,7 +256,7 @@ class _TrimScreenState extends State<TrimScreen> {
       return;
     }
 
-    String req = "a=$t1&b=$t2&c=$t3&d=$t4&e=$t5&f=$t6";
+    String req = "t1=$t1&t2=$t2&t3=$t3&t4=$t4&t5=$t5&t6=$t6";
     print(req);
     http
         .get(
@@ -328,17 +289,14 @@ class _TrimScreenState extends State<TrimScreen> {
     String t4 = tctrl4.text;
     String t5 = tctrl5.text;
     String t6 = tctrl6.text;
-    String t7 = tctrl7.text;
-    String t8 = tctrl8.text;
+
     if (t1.isEmpty ||
         t2.isEmpty ||
         t3.isEmpty ||
         t4.isEmpty ||
         t4.isEmpty ||
         t5.isEmpty ||
-        t6.isEmpty ||
-        t7.isEmpty ||
-        t8.isEmpty) {
+        t6.isEmpty) {
       Fluttertoast.showToast(
           msg: "Set your trims!!",
           toastLength: Toast.LENGTH_SHORT,
@@ -348,11 +306,11 @@ class _TrimScreenState extends State<TrimScreen> {
       return;
     }
 
-    String req = "t1=$t1&t2=$t2&t3=$t3&t4=$t4&t5=$t5&t6=$t6&t7=$t7&t8=$t8";
-    print("http://192.168.4.1/18?=$req");
+    String req = "t1=$t1&t2=$t2&t3=$t3&t4=$t4&t5=$t5&t6=$t6";
+    print("http://192.168.4.1/testtrim?=$req");
     http
         .get(
-      Uri.parse("http://192.168.4.1/18?$req"),
+      Uri.parse("http://192.168.4.1/testtrim?$req"),
     )
         .then((response) {
       print(response.body);
