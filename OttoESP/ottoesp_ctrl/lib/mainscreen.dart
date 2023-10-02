@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:mini_espkame/trimscreen.dart';
+import 'trimscreen.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:open_settings/open_settings.dart';
@@ -63,7 +63,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     setState(() {
       _lastWords = result.recognizedWords;
       if (result.finalResult) {
-        voiceKame(_lastWords);
+        voiceOtto(_lastWords);
       }
     });
   }
@@ -95,7 +95,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Kame Controller'),
+          title: const Text('Otto Controller'),
           actions: [
             IconButton(
                 onPressed: () {
@@ -107,7 +107,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                       fontSize: 16.0);
                   http
                       .get(
-                    Uri.parse("http://192.168.4.1/15"),
+                    Uri.parse("http://192.168.4.1/readsetting"),
                   )
                       .then((response) {
                     if (response.statusCode == 200) {
@@ -117,7 +117,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                               builder: (content) => const TrimScreen()));
                     } else {
                       Fluttertoast.showToast(
-                          msg: 'Failed. Please connect to your Kame first',
+                          msg: 'Failed. Please connect to your Otto first',
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           timeInSecForIosWeb: 1,
@@ -125,7 +125,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     }
                   }).timeout(const Duration(seconds: 5), onTimeout: () {
                     Fluttertoast.showToast(
-                        msg: 'Timeout. Please connect to your Kame first',
+                        msg: 'Timeout. Please connect to your Otto first',
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.BOTTOM,
                         timeInSecForIosWeb: 1,
@@ -144,15 +144,18 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 5),
                 const Text(
-                  "Please connect to Kame access point.\nCurrently connected to:",
+                  "Please connect to Otto access point.\nCurrently connected to:",
                   style: TextStyle(fontSize: 16.0),
                   textAlign: TextAlign.justify,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(ssid,style: const TextStyle(fontSize: 24.0),),
+                  child: Text(
+                    ssid,
+                    style: const TextStyle(fontSize: 24.0),
+                  ),
                 ),
                 const SizedBox(height: 5),
                 Row(
@@ -188,18 +191,18 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 const Divider(
                   height: 1,
                   color: Colors.black,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RawMaterialButton(
                       onPressed: () {
-                        commandKame("1");
+                        commandOtto("1");
                       },
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -216,7 +219,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     //     icon: const Icon(Icons.arrow_upward),
                     //     label: const Text("FORWARD"),
                     //     onPressed: () {
-                    //       commandKame("1");
+                    //       commandOtto("1");
                     //     },
                     //   ),
                     // )
@@ -228,7 +231,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   children: [
                     RawMaterialButton(
                       onPressed: () {
-                        commandKame("3");
+                        commandOtto("3");
                       },
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -244,7 +247,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     //     child: ElevatedButton(
                     //       child: const Text("LEFT"),
                     //       onPressed: () {
-                    //         commandKame("3");
+                    //         commandOtto("3");
                     //       },
                     //     )),
                     const SizedBox(
@@ -252,7 +255,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     ),
                     RawMaterialButton(
                       onPressed: () {
-                        commandKame("5");
+                        commandOtto("5");
                       },
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -268,7 +271,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     //     child: ElevatedButton(
                     //       child: const Text("HOME"),
                     //       onPressed: () {
-                    //         commandKame("5");
+                    //         commandOtto("5");
                     //       },
                     //     )),
                     const SizedBox(
@@ -276,7 +279,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     ),
                     RawMaterialButton(
                       onPressed: () {
-                        commandKame("4");
+                        commandOtto("2");
                       },
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -292,7 +295,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     //     child: ElevatedButton(
                     //       child: const Text("RIGHT"),
                     //       onPressed: () {
-                    //         commandKame("4");
+                    //         commandOtto("4");
                     //       },
                     //     ))
                   ],
@@ -303,7 +306,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   children: [
                     RawMaterialButton(
                       onPressed: () {
-                        commandKame("16");
+                        commandOtto("4");
                       },
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -319,35 +322,35 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     //     child: ElevatedButton(
                     //       child: const Text("ZERO"),
                     //       onPressed: () {
-                    //         commandKame("0");
+                    //         commandOtto("0");
                     //       },
                     //     )),
-                    const SizedBox(width: 20),
-                    RawMaterialButton(
-                      onPressed: () {
-                        commandKame("15");
-                      },
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      padding: const EdgeInsets.all(15.0),
-                      fillColor: Colors.white,
-                      elevation: 2.0,
-                      child: const Icon(Icons.start, size: 35),
-                    ),
-                    // SizedBox(
-                    //     width: 110,
-                    //     height: 50,
-                    //     child: ElevatedButton(
-                    //       child: const Text("INIT"),
-                    //       onPressed: () {
-                    //         commandKame("15");
-                    //       },
-                    //     ))
+                    // const SizedBox(width: 20),
+                    // RawMaterialButton(
+                    //   onPressed: () {
+                    //     commandOtto("15");
+                    //   },
+                    //   shape: const RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.all(Radius.circular(5)),
+                    //   ),
+                    //   padding: const EdgeInsets.all(15.0),
+                    //   fillColor: Colors.white,
+                    //   elevation: 2.0,
+                    //   child: const Icon(Icons.start, size: 35),
+                    // ),
+                    // // SizedBox(
+                    // //     width: 110,
+                    // //     height: 50,
+                    // //     child: ElevatedButton(
+                    // //       child: const Text("INIT"),
+                    // //       onPressed: () {
+                    // //         commandOtto("15");
+                    // //       },
+                    // //     ))
                   ],
                 ),
                 const SizedBox(height: 5),
-                const SizedBox(height: 20),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -355,18 +358,42 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("PUSHUP"),
+                          child: const Text("BEND-L"),
                           onPressed: () {
-                            commandKame("6");
+                            commandOtto("5");
                           },
                         )),
                     SizedBox(
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("UPDOWN"),
+                          child: const Text("MOON"),
                           onPressed: () {
-                            commandKame("7");
+                            commandOtto("10");
+                          },
+                        )),
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("BEND-R"),
+                          onPressed: () {
+                            commandOtto("6");
+                          },
+                        ))
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("SHAKE-L"),
+                          onPressed: () {
+                            commandOtto("7");
                           },
                         )),
                     SizedBox(
@@ -375,78 +402,153 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         child: ElevatedButton(
                           child: const Text("JUMP"),
                           onPressed: () {
-                            commandKame("8");
+                            commandOtto("10");
+                          },
+                        )),
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("SHAKE-R"),
+                          onPressed: () {
+                            commandOtto("11");
                           },
                         ))
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text("HELLO"),
-                          onPressed: () {
-                            commandKame("9");
-                          },
-                        )),
-                    SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text("PUNCH"),
-                          onPressed: () {
-                            commandKame("10");
-                          },
-                        )),
-                    SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text("DANCE"),
-                          onPressed: () {
-                            commandKame("11");
-                          },
-                        ))
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text("MOON"),
-                          onPressed: () {
-                            commandKame("12");
-                          },
-                        )),
                     SizedBox(
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
                           child: const Text("RUN"),
                           onPressed: () {
-                            commandKame("13");
+                            commandOtto("18");
                           },
                         )),
                     SizedBox(
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("OMNI"),
+                          child: const Text("SWING"),
                           onPressed: () {
-                            commandKame("14");
+                            commandOtto("12");
+                          },
+                        )),
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("JITTER"),
+                          onPressed: () {
+                            commandOtto("14");
                           },
                         )),
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("ASC"),
+                          onPressed: () {
+                            commandOtto("15");
+                          },
+                        )),
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("CRUS"),
+                          onPressed: () {
+                            commandOtto("16");
+                          },
+                        )),
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("FLAP"),
+                          onPressed: () {
+                            commandOtto("17");
+                          },
+                        )),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("AUTO"),
+                          onPressed: () {
+                            commandOtto("19");
+                          },
+                        )),
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("STOP"),
+                          onPressed: () {
+                            commandOtto("20");
+                          },
+                        )),
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("UPDOWN"),
+                          onPressed: () {
+                            commandOtto("9");
+                          },
+                        )),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("HAND-W"),
+                          onPressed: () {
+                            commandOtto("21");
+                          },
+                        )),
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("HAND-U"),
+                          onPressed: () {
+                            commandOtto("22");
+                          },
+                        )),
+                    SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text("HAND-UD"),
+                          onPressed: () {
+                            commandOtto("23");
+                          },
+                        )),
+                  ],
+                ),
+                const SizedBox(height: 5),
                 const Divider(
                   height: 1,
                   color: Colors.black,
@@ -505,55 +607,76 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     });
   }
 
-  void voiceKame(String command) {
+  void voiceOtto(String command) {
     switch (command.toLowerCase()) {
       case "0":
-        commandKame("0");
+        commandOtto("0");
         break;
       case "forward":
-        commandKame("1");
-        break;
-      case "down":
-        commandKame("2");
-        break;
-      case "left":
-        commandKame("3");
+        commandOtto("1");
         break;
       case "right":
-        commandKame("4");
+        commandOtto("2");
         break;
-      case "home":
-        commandKame("5");
+      case "left":
+        commandOtto("3");
         break;
-      case "push-up":
-        commandKame("6");
+      case "backward":
+        commandOtto("4");
+        break;
+      case "bend left":
+        commandOtto("5");
+        break;
+      case "bend rigth":
+        commandOtto("6");
+        break;
+      case "shake left":
+        commandOtto("7");
+        break;
+      case "shake right":
+        commandOtto("8");
         break;
       case "up down":
-        commandKame("7");
+        commandOtto("9");
         break;
-      case "jump":
-        commandKame("8");
+      case "moon":
+        commandOtto("10");
         break;
-      case "hello":
-        commandKame("9");
+      case "swing":
+        commandOtto("12");
         break;
-      case "punch":
-        commandKame("10");
+      case "tiptoe swing":
+        commandOtto("13");
         break;
-      case "dance":
-        commandKame("11");
+      case "jitter":
+        commandOtto("14");
         break;
-      case "moonwalk":
-        commandKame("12");
+      case "asc":
+        commandOtto("15");
+        break;
+      case "crus":
+        commandOtto("16");
+        break;
+      case "flap":
+        commandOtto("17");
         break;
       case "run":
-        commandKame("13");
+        commandOtto("18");
         break;
-      case "omni":
-        commandKame("14");
+      case "auto":
+        commandOtto("19");
         break;
-      case "initialise":
-        commandKame("15");
+      case "auto off":
+        commandOtto("20");
+        break;
+      case "hand wave":
+        commandOtto("21");
+        break;
+      case "hand up":
+        commandOtto("22");
+        break;
+      case "hand up down":
+        commandOtto("23");
         break;
       default:
         Fluttertoast.showToast(
@@ -566,15 +689,15 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     }
   }
 
-  void commandKame(String s) {
-    if (ssid=="Not available"){
-       Fluttertoast.showToast(
-          msg: 'Please connect to Kame AP',
+  void commandOtto(String s) {
+    if (ssid == "Not available") {
+      Fluttertoast.showToast(
+          msg: 'Please connect to Otto AP',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 16.0);
-          return;
+      return;
     }
     http
         .get(
@@ -598,7 +721,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         ssid = "Not available";
       } else {
         ssid = wifiName.toString().replaceAll('"', '');
-        
       }
     });
     // ignore: deprecated_member_use
@@ -724,7 +846,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5.0))),
           title: const Text(
-            "Change KAME SSID?",
+            "Change Otto SSID?",
             style: TextStyle(),
           ),
           content: Column(
@@ -783,7 +905,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           title: const Text(
-            "This will reset your KAME ssid. Make sure you are connnected to one. Are you sure?",
+            "This will reset your Otto ssid. Make sure you are connnected to one. Are you sure?",
             style: TextStyle(),
           ),
           actions: <Widget>[
@@ -794,7 +916,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
               ),
               onPressed: () {
                 Navigator.of(context).pop();
-                commandKame("17");
+                commandOtto("17");
               },
             ),
             TextButton(
