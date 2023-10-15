@@ -29,6 +29,8 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   bool _speechEnabled = false;
   String _lastWords = '';
   final NetworkInfo _networkInfo = NetworkInfo();
+
+  String voltage = "0v";
   @override
   void initState() {
     super.initState();
@@ -144,7 +146,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 const Text(
                   "Please connect to Kame access point.\nCurrently connected to:",
                   style: TextStyle(fontSize: 16.0),
@@ -152,41 +154,65 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(ssid,style: const TextStyle(fontSize: 24.0),),
+                  child: Text(
+                    ssid,
+                    style: const TextStyle(fontSize: 24.0),
+                  ),
                 ),
                 const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      child: const Text("CHECK"),
-                      onPressed: () {
-                        getPermission();
-                        _getWifissid();
-                      },
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          child: const Text("CHECK"),
+                          onPressed: () {
+                            getPermission();
+                            _getWifissid();
+                          },
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        ElevatedButton(
+                          child: const Text("WIFI"),
+                          onPressed: () {
+                            OpenSettings.openWIFISetting();
+                          },
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        ElevatedButton(
+                          child: const Text("RESET"),
+                          onPressed: () {
+                            resetDialog();
+                          },
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        ElevatedButton(
+                          child: const Text("CHANGE"),
+                          onPressed: () {
+                            changeSSIDDialog();
+                          },
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        ElevatedButton(
+                          child: const Text("VOLTAGE"),
+                          onPressed: () {
+                            getVoltage();
+                          },
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("WIFI"),
-                      onPressed: () {
-                        OpenSettings.openWIFISetting();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("RESET"),
-                      onPressed: () {
-                        resetDialog();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("CHANGE"),
-                      onPressed: () {
-                        changeSSIDDialog();
-                      },
-                    ),
-                  ],
+                  ),
                 ),
                 const SizedBox(height: 10),
                 const Divider(
@@ -555,6 +581,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
       case "initialise":
         commandKame("15");
         break;
+      case "voltage":
+        commandKame("readvoltage");
+        break;
       default:
         Fluttertoast.showToast(
             msg: "Command not available",
@@ -567,14 +596,14 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   }
 
   void commandKame(String s) {
-    if (ssid=="Not available"){
-       Fluttertoast.showToast(
+    if (ssid == "Not available") {
+      Fluttertoast.showToast(
           msg: 'Please connect to Kame AP',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 16.0);
-          return;
+      return;
     }
     http
         .get(
@@ -598,7 +627,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         ssid = "Not available";
       } else {
         ssid = wifiName.toString().replaceAll('"', '');
-        
       }
     });
     // ignore: deprecated_member_use
@@ -810,5 +838,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         );
       },
     );
+  }
+
+  void getVoltage() {
+    commandKame("readvoltage");
   }
 }
