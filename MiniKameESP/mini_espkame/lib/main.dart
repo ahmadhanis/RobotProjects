@@ -17,13 +17,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Kame Controller',
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
-        brightness: Brightness.light,
-        textTheme: GoogleFonts.latoTextTheme(
-          Theme.of(context)
-              .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
-        ),
-      ),
+          useMaterial3: true,
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: Colors.black, primary: Colors.red
+                  // brightness: Brightness.dark,
+                  ),
+          textTheme: GoogleFonts.poppinsTextTheme(ThemeData.light().textTheme)),
       home: const MyHomePage(title: 'Mini Kame'),
     );
   }
@@ -72,10 +71,11 @@ class _MySplashScreenState extends State<MySplashScreen> {
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text("ESP-KAME Controller",
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                   )),
               Padding(
@@ -91,7 +91,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   )),
-              const Text("Version 0.2",
+              const Text("Version 0.8.0",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

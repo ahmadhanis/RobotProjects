@@ -147,46 +147,66 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                 const SizedBox(height: 20),
                 const Text(
                   "Please connect to Kame access point.\nCurrently connected to:",
-                  style: TextStyle(fontSize: 16.0),
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
                   textAlign: TextAlign.justify,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(ssid,style: const TextStyle(fontSize: 24.0),),
+                  child: Text(
+                    ssid,
+                    style: const TextStyle(fontSize: 24.0),
+                  ),
                 ),
                 const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      child: const Text("CHECK"),
-                      onPressed: () {
-                        getPermission();
-                        _getWifissid();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("WIFI"),
-                      onPressed: () {
-                        OpenSettings.openWIFISetting();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("RESET"),
-                      onPressed: () {
-                        resetDialog();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("CHANGE"),
-                      onPressed: () {
-                        changeSSIDDialog();
-                      },
-                    ),
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        child: const Text(
+                          "CHECK",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        onPressed: () {
+                          getPermission();
+                          _getWifissid();
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        child: const Text(
+                          "WIFI",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        onPressed: () {
+                          OpenSettings.openWIFISetting();
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        child: const Text(
+                          "RESET",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        onPressed: () {
+                          resetDialog();
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        child: const Text(
+                          "CHANGE",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        onPressed: () {
+                          changeSSIDDialog();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 10),
                 const Divider(
@@ -209,17 +229,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                       elevation: 2.0,
                       child: const Icon(Icons.arrow_upward, size: 35),
                     ),
-                    // SizedBox(
-                    //   width: 150,
-                    //   height: 50,
-                    //   child: ElevatedButton.icon(
-                    //     icon: const Icon(Icons.arrow_upward),
-                    //     label: const Text("FORWARD"),
-                    //     onPressed: () {
-                    //       commandKame("1");
-                    //     },
-                    //   ),
-                    // )
                   ],
                 ),
                 const SizedBox(height: 5),
@@ -238,15 +247,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                       elevation: 2.0,
                       child: const Icon(Icons.arrow_back, size: 35),
                     ),
-                    // SizedBox(
-                    //     width: 100,
-                    //     height: 50,
-                    //     child: ElevatedButton(
-                    //       child: const Text("LEFT"),
-                    //       onPressed: () {
-                    //         commandKame("3");
-                    //       },
-                    //     )),
                     const SizedBox(
                       width: 20,
                     ),
@@ -262,15 +262,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                       elevation: 2.0,
                       child: const Icon(Icons.home, size: 35),
                     ),
-                    // SizedBox(
-                    //     width: 100,
-                    //     height: 50,
-                    //     child: ElevatedButton(
-                    //       child: const Text("HOME"),
-                    //       onPressed: () {
-                    //         commandKame("5");
-                    //       },
-                    //     )),
                     const SizedBox(
                       width: 20,
                     ),
@@ -286,15 +277,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                       elevation: 2.0,
                       child: const Icon(Icons.arrow_forward, size: 35),
                     ),
-                    // SizedBox(
-                    //     width: 100,
-                    //     height: 50,
-                    //     child: ElevatedButton(
-                    //       child: const Text("RIGHT"),
-                    //       onPressed: () {
-                    //         commandKame("4");
-                    //       },
-                    //     ))
                   ],
                 ),
                 const SizedBox(height: 5),
@@ -355,7 +337,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("PUSHUP"),
+                          child: const Text(
+                            "PUSHUP",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           onPressed: () {
                             commandKame("6");
                           },
@@ -364,7 +349,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("UPDOWN"),
+                          child: const Text(
+                            "UPDOWN",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           onPressed: () {
                             commandKame("7");
                           },
@@ -373,7 +361,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("JUMP"),
+                          child: const Text(
+                            "JUMP",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           onPressed: () {
                             commandKame("8");
                           },
@@ -388,7 +379,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("HELLO"),
+                          child: const Text(
+                            "HELLO",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           onPressed: () {
                             commandKame("9");
                           },
@@ -397,7 +391,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("PUNCH"),
+                          child: const Text(
+                            "PUNCH",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           onPressed: () {
                             commandKame("10");
                           },
@@ -406,7 +403,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("DANCE"),
+                          child: const Text(
+                            "DANCE",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           onPressed: () {
                             commandKame("11");
                           },
@@ -421,7 +421,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("MOON"),
+                          child: const Text(
+                            "MOON",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           onPressed: () {
                             commandKame("12");
                           },
@@ -430,7 +433,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("RUN"),
+                          child: const Text(
+                            "RUN",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           onPressed: () {
                             commandKame("13");
                           },
@@ -439,7 +445,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("OMNI"),
+                          child: const Text(
+                            "OMNI",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           onPressed: () {
                             commandKame("14");
                           },
@@ -567,26 +576,48 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   }
 
   void commandKame(String s) {
-    if (ssid=="Not available"){
-       Fluttertoast.showToast(
+    if (ssid == "Not available") {
+      Fluttertoast.showToast(
           msg: 'Please connect to Kame AP',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 16.0);
-          return;
+      return;
     }
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
     http
         .get(
       Uri.parse("http://192.168.4.1/$s"),
     )
         .then((response) {
+      Navigator.pop(context);
       Fluttertoast.showToast(
           msg: response.body,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 16.0);
+    }).timeout(const Duration(seconds: 20), onTimeout: () {
+      Navigator.pop(context);
+      Fluttertoast.showToast(
+        msg:
+            'Request timed out. Please try again. Check your connection to Kame AP.',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        fontSize: 16.0,
+      );
     });
   }
 
@@ -598,7 +629,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         ssid = "Not available";
       } else {
         ssid = wifiName.toString().replaceAll('"', '');
-        
       }
     });
     // ignore: deprecated_member_use
@@ -724,8 +754,8 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5.0))),
           title: const Text(
-            "Change KAME SSID?",
-            style: TextStyle(),
+            "Change KAME SSID?. Make sure you are connected to Kame AP.",
+            style: TextStyle(fontSize: 16),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -783,8 +813,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           title: const Text(
-            "This will reset your KAME ssid. Make sure you are connnected to one. Are you sure?",
-            style: TextStyle(),
+            "This will reset your KAME ssid to 'NewKame'.All the trims settings will be reset. Make sure you are connnected to Kame. Are you sure?",
+            style: TextStyle(fontSize: 14),
+            textAlign: TextAlign.justify,
           ),
           actions: <Widget>[
             TextButton(
