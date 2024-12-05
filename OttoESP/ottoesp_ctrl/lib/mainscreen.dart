@@ -91,7 +91,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         // widget is detached
         break;
       case AppLifecycleState.hidden:
-        // TODO: Handle this case.
+      // TODO: Handle this case.
     }
   }
 
@@ -365,7 +365,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("BEND-L",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "BEND-L",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("5");
                           },
@@ -374,7 +377,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("MOON",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "MOON",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("10");
                           },
@@ -383,7 +389,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("BEND-R",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "BEND-R",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("6");
                           },
@@ -398,7 +407,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("SHAKE-L",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "SHAKE-L",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("7");
                           },
@@ -407,18 +419,24 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("JUMP",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "JUMP",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
-                            commandOtto("10");
+                            commandOtto("11");
                           },
                         )),
                     SizedBox(
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("SHAKE-R",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "SHAKE-R",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
-                            commandOtto("11");
+                            commandOtto("8");
                           },
                         ))
                   ],
@@ -431,7 +449,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("RUN",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "RUN",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("18");
                           },
@@ -440,7 +461,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("SWING",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "SWING",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("12");
                           },
@@ -449,7 +473,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("JITTER",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "JITTER",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("14");
                           },
@@ -464,7 +491,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("ASC",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "ASC",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("15");
                           },
@@ -473,7 +503,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("CRUS",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "CRUS",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("16");
                           },
@@ -482,7 +515,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("FLAP",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "FLAP",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("17");
                           },
@@ -497,7 +533,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("AUTO",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "AUTO",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("19");
                           },
@@ -506,7 +545,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("STOP",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "STOP",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("20");
                           },
@@ -515,7 +557,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("UPDOWN",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "UPDOWN",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("9");
                           },
@@ -530,7 +575,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("HAND-W",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "HAND-W",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("21");
                           },
@@ -539,7 +587,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("HAND-U",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "HAND-U",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("22");
                           },
@@ -548,7 +599,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("HAND-UD",style: TextStyle(fontSize: 11),),
+                          child: const Text(
+                            "HAND-UD",
+                            style: TextStyle(fontSize: 11),
+                          ),
                           onPressed: () {
                             commandOtto("23");
                           },
@@ -599,10 +653,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         ));
   }
 
-  void changeSSID(newssid, newpass) {
+  void changeSSID(newssid) {
     http
         .get(
-      Uri.parse("http://192.168.4.1/changename?ssid=$newssid&password=$newpass"),
+      Uri.parse("http://192.168.4.1/changename?ssid=$newssid"),
     )
         .then((response) {
       Fluttertoast.showToast(
@@ -711,7 +765,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
       Uri.parse("http://192.168.4.1/$s"),
     )
         .then((response) {
-          log(response.body);
+      log(response.body);
       Fluttertoast.showToast(
           msg: response.body,
           toastLength: Toast.LENGTH_SHORT,
@@ -868,14 +922,14 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                         borderRadius: BorderRadius.circular(5.0))),
               ),
               const SizedBox(height: 5),
-              TextFormField(
-                controller: passctrl,
-                // obscureText: true,
-                decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
+              // TextFormField(
+              //   controller: passctrl,
+              //   // obscureText: true,
+              //   decoration: InputDecoration(
+              //       labelText: 'Password',
+              //       border: OutlineInputBorder(
+              //           borderRadius: BorderRadius.circular(5.0))),
+              // ),
             ],
           ),
           actions: <Widget>[
@@ -886,7 +940,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
               ),
               onPressed: () {
                 Navigator.of(context).pop();
-                changeSSID(ssidctrl.text, passctrl.text);
+                changeSSID(ssidctrl.text);
               },
             ),
             TextButton(
