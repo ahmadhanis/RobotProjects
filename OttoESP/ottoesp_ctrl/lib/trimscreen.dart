@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -16,7 +18,7 @@ class _TrimScreenState extends State<TrimScreen> {
     loadTrim();
   }
 
-  TextEditingController tctrl1 = TextEditingController();//body left
+  TextEditingController tctrl1 = TextEditingController(); //body left
   TextEditingController tctrl2 = TextEditingController(); //body right
   TextEditingController tctrl3 = TextEditingController(); //Left Leg
   TextEditingController tctrl4 = TextEditingController(); //Rigth Leg
@@ -167,18 +169,12 @@ class _TrimScreenState extends State<TrimScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ElevatedButton.icon(
-                  onPressed: loadTrim,
-                  icon: const Icon(Icons.get_app),
-                  label: const Text("Load Trim")),
-              ElevatedButton.icon(
-                  onPressed: saveTrim,
-                  icon: const Icon(Icons.save),
-                  label: const Text("Save Trim")),
-              ElevatedButton.icon(
-                  onPressed: testTrim,
-                  icon: const Icon(Icons.save),
-                  label: const Text("Test Trim"))
+              ElevatedButton(
+                  onPressed: loadTrim, child: const Text("Load Trim")),
+              ElevatedButton(
+                  onPressed: saveTrim, child: const Text("Save Trim")),
+              ElevatedButton(
+                  onPressed: testTrim, child: const Text("Test Trim"))
             ],
           )
         ],
@@ -260,7 +256,7 @@ class _TrimScreenState extends State<TrimScreen> {
     print(req);
     http
         .get(
-      Uri.parse("http://192.168.4.1/setting?$req"),
+      Uri.parse("http://192.168.4.1/trimssetting?$req"),
     )
         .then((response) {
       print(response.body);
@@ -307,10 +303,10 @@ class _TrimScreenState extends State<TrimScreen> {
     }
 
     String req = "t1=$t1&t2=$t2&t3=$t3&t4=$t4&t5=$t5&t6=$t6";
-    print("http://192.168.4.1/testtrim?=$req");
+    log("http://192.168.4.1/testtrims?$req");
     http
         .get(
-      Uri.parse("http://192.168.4.1/testtrim?$req"),
+      Uri.parse("http://192.168.4.1/testtrims?$req"),
     )
         .then((response) {
       print(response.body);

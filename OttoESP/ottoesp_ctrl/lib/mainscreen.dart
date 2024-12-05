@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'trimscreen.dart';
@@ -88,6 +90,8 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
       case AppLifecycleState.detached:
         // widget is detached
         break;
+      case AppLifecycleState.hidden:
+        // TODO: Handle this case.
     }
   }
 
@@ -158,38 +162,41 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   ),
                 ),
                 const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      child: const Text("CHECK"),
-                      onPressed: () {
-                        getPermission();
-                        _getWifissid();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("WIFI"),
-                      onPressed: () {
-                        OpenSettings.openWIFISetting();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("RESET"),
-                      onPressed: () {
-                        resetDialog();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      child: const Text("CHANGE"),
-                      onPressed: () {
-                        changeSSIDDialog();
-                      },
-                    ),
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        child: const Text("CHECK"),
+                        onPressed: () {
+                          getPermission();
+                          _getWifissid();
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        child: const Text("WIFI"),
+                        onPressed: () {
+                          OpenSettings.openWIFISetting();
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        child: const Text("RESET"),
+                        onPressed: () {
+                          resetDialog();
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        child: const Text("CHANGE"),
+                        onPressed: () {
+                          changeSSIDDialog();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 5),
                 const Divider(
@@ -242,7 +249,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                       child: const Icon(Icons.arrow_back, size: 35),
                     ),
                     // SizedBox(
-                    //     width: 100,
+                    //     width: 120,
                     //     height: 50,
                     //     child: ElevatedButton(
                     //       child: const Text("LEFT"),
@@ -266,7 +273,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                       child: const Icon(Icons.home, size: 35),
                     ),
                     // SizedBox(
-                    //     width: 100,
+                    //     width: 120,
                     //     height: 50,
                     //     child: ElevatedButton(
                     //       child: const Text("HOME"),
@@ -290,7 +297,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                       child: const Icon(Icons.arrow_forward, size: 35),
                     ),
                     // SizedBox(
-                    //     width: 100,
+                    //     width: 120,
                     //     height: 50,
                     //     child: ElevatedButton(
                     //       child: const Text("RIGHT"),
@@ -317,7 +324,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                       child: const Icon(Icons.arrow_downward, size: 35),
                     ),
                     // SizedBox(
-                    //     width: 110,
+                    //     width: 120,
                     //     height: 50,
                     //     child: ElevatedButton(
                     //       child: const Text("ZERO"),
@@ -339,7 +346,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                     //   child: const Icon(Icons.start, size: 35),
                     // ),
                     // // SizedBox(
-                    // //     width: 110,
+                    // //     width: 120,
                     // //     height: 50,
                     // //     child: ElevatedButton(
                     // //       child: const Text("INIT"),
@@ -355,28 +362,28 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("BEND-L"),
+                          child: const Text("BEND-L",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("5");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("MOON"),
+                          child: const Text("MOON",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("10");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("BEND-R"),
+                          child: const Text("BEND-R",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("6");
                           },
@@ -388,28 +395,28 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("SHAKE-L"),
+                          child: const Text("SHAKE-L",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("7");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("JUMP"),
+                          child: const Text("JUMP",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("10");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("SHAKE-R"),
+                          child: const Text("SHAKE-R",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("11");
                           },
@@ -421,28 +428,28 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("RUN"),
+                          child: const Text("RUN",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("18");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("SWING"),
+                          child: const Text("SWING",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("12");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("JITTER"),
+                          child: const Text("JITTER",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("14");
                           },
@@ -454,28 +461,28 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("ASC"),
+                          child: const Text("ASC",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("15");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("CRUS"),
+                          child: const Text("CRUS",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("16");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("FLAP"),
+                          child: const Text("FLAP",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("17");
                           },
@@ -487,28 +494,28 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("AUTO"),
+                          child: const Text("AUTO",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("19");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("STOP"),
+                          child: const Text("STOP",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("20");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("UPDOWN"),
+                          child: const Text("UPDOWN",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("9");
                           },
@@ -520,28 +527,28 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("HAND-W"),
+                          child: const Text("HAND-W",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("21");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("HAND-U"),
+                          child: const Text("HAND-U",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("22");
                           },
                         )),
                     SizedBox(
-                        width: 100,
+                        width: 120,
                         height: 50,
                         child: ElevatedButton(
-                          child: const Text("HAND-UD"),
+                          child: const Text("HAND-UD",style: TextStyle(fontSize: 11),),
                           onPressed: () {
                             commandOtto("23");
                           },
@@ -704,6 +711,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
       Uri.parse("http://192.168.4.1/$s"),
     )
         .then((response) {
+          log(response.body);
       Fluttertoast.showToast(
           msg: response.body,
           toastLength: Toast.LENGTH_SHORT,
